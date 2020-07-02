@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-deployment
+  labels:
+    color: blue
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      color: blue
+  template:
+    metadata:
+      labels:
+        color: blue
+    spec:
+      containers:
+      - name: blue
+        image: ozgurozturknet/test:blue
+        ports:
+        - containerPort: 80
+        env:
+          - name: USER
+            value: "Blue User"
+---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: red-deployment
+    labels:
+      color: red
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        color: red
+    template:
+      metadata:
+        labels:
+          color: red
+      spec:
+        containers:
+        - name: red
+          image: ozgurozturknet/test:red
+          ports:
+          - containerPort: 80
+          env:
+            - name: USER
+              value: "Red User"
