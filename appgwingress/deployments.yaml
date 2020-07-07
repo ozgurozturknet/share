@@ -5,7 +5,7 @@ metadata:
   labels:
     color: blue
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       color: blue
@@ -17,8 +17,18 @@ spec:
       containers:
       - name: blue
         image: ozgurozturknet/test:blue
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 80
+        livenessProbe: 
+          httpGet: 
+            path: /
+            port: 80 
+          initialDelaySeconds: 2
+          periodSeconds: 2
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
         env:
           - name: USER
             value: "Blue User"
@@ -30,7 +40,7 @@ spec:
     labels:
       color: red
   spec:
-    replicas: 2
+    replicas: 3
     selector:
       matchLabels:
         color: red
@@ -42,8 +52,18 @@ spec:
         containers:
         - name: red
           image: ozgurozturknet/test:red
+          imagePullPolicy: "Always"
           ports:
           - containerPort: 80
+          livenessProbe: 
+            httpGet: 
+              path: / 
+              port: 80 
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
           env:
             - name: USER
               value: "Red User"
