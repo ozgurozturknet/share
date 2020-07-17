@@ -18,3 +18,9 @@ spec:
             - backend:
                 serviceName: red-service
                 servicePort: 80
+    - host: grafana.ozgurozturk.net
+      http:
+        paths:
+            - backend:
+                serviceName: grafana-1594219670
+                servicePort: 80
